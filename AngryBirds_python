@@ -1,0 +1,105 @@
+# There is only one pig at 70 feet. The user kills the pig if the distance travelled
+# by the bird is the total distance+-2 feet.
+# Ask the user speed (>=0) and angle ([0-90]).
+# These are the equations that you have to express to calculate the distance travelled
+# by the bird launched
+# distance=speed^2*sin(2*alpha)/G
+# radians=degrees*PI/180.0
+# The speed is how fast (in feet per second) you launch the bird, alpha
+# is the angle with the horizontal that you launch it.
+# Zero degrees would be flat on the ground, 90 degrees would be straight up.
+# Use 32.2(feet per second squared) for the constant G.The function sin from the math
+# library must have radians as its argument. The input angle from the user (alpha)
+# will be in degrees so some conversion must be done. The distance travelled
+# must be printed with 2 decimal places.
+# Print "The pig is dead", "too short" or "too far", depending on the distance
+
+# The user keeps playing until he types 0 for speed.
+# Sample output:
+# Angry Birds!
+# The pig is 70 feet far away
+# What speed to launch at (fps) (0 to stop)? 50
+# What angle (in degrees)? 33
+# For a bird launched at 50 feet per sec with an angle of 33 degrees
+# from the horizontal the distance travelled is 70.93 feet
+# You killed the pig.
+# Angry Birds!
+# The pig is 70 feet far away
+# What speed to launch at (fps) (0 to stop)? 0
+# Good bye!!
+import math
+
+
+
+#initial variables
+
+G = 32.2
+pig = 50
+speed = 1
+pigsdead= 0
+birds = 1
+continuegame = True
+
+#Game start
+while continuegame == True:
+
+    #prints the initinialization of the game
+    print "Angry Birds!"
+    print "The pig is %d feet away" %pig
+
+    #asks for the speed
+    speed = float(raw_input("What speed to launch the bird?"))
+    while speed < 0:
+        speed = float(raw_input("What speed to launch the bird?"))
+
+
+    #executes the program if speed is different from 0, you have attempts and you didn't kill all the pigs
+    while speed !=0 and birds<=5 and pigsdead<3:
+
+
+
+        #asks for the angle
+        angle = float(raw_input("What angle to launch the bird?"))
+        while angle < 0 or angle > 90:
+            angle = float(raw_input("Enter the angle [0-90]"))
+
+        #calculates the distance
+        distance = speed**2*math.sin(2*(angle*(math.pi/180.0)))/G
+
+        #prints the distance traveled with the speed and the angle given
+        print "For a bird launched at %f feet per sec with an angle of %f degrees" %(round(speed,2), round(angle,2))
+        print "from the horizontal the distance traveled is %f feet" %round(distance, 2)
+
+        #checks if you killed the pig
+        if distance >= pig-2 and distance <= pig+2:
+            print "You killed the pig!"
+            pig+=10
+            pigsdead+=1
+
+        #if you didn't kill the pig, calculates if the bir was short or far
+        elif distance <pig-2:
+            print "Too short, try again"
+
+        else:
+            print "Too far, try again"
+
+        #adds 1 attemp
+        birds+=1
+
+
+
+        #initializes the game again if you have birds
+        if birds <=5 and pigsdead <3:
+
+            #prints the initinialization of the game
+            print "Angry Birds!"
+            print "The pig is %d feet away" %pig
+
+            speed = float(raw_input("What speed to launch the bird?"))
+            while speed < 0:
+                speed = float(raw_input("What speed to launch the bird?"))
+
+    #ends the game
+    continuegame = False
+
+print "Good Bye!. You killed %d pigs" %pigsdead
