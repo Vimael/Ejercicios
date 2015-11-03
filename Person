@@ -1,0 +1,317 @@
+import java.util.*;
+/**
+ * Write a description of class Person here.
+ * 
+ * @author Víctor Manuel Núñez González
+ * @version 150916
+ */
+public class Person
+{
+    private String name = "Víctor Manuel";
+    private String surname = "Núñez González";
+    private int age = 18;
+    private boolean gender = false; //True value is for women and false value for men
+    
+    //CONSTANT FIELDS
+    public final static boolean FEMALE_VALUE = true;
+    public final static boolean MALE_VALUE = false;
+    
+    public final static int MAX_AGE_VALUE = 118;
+    
+    public final static String MALE_TEXT = "home";
+    public final static String FEMALE_TEXT = "muyer";
+    
+    public final static int ADULTHOOD_AGE = 18;
+    public final static int RETIREMENT_AGE = 67;
+    
+    
+    /**
+     * Constructor for objects of class Person
+     */
+    public Person()
+    {
+        Random generator = new Random();
+
+        if (generator.nextBoolean() == false)
+            setName("Yuri");
+        else
+            setName("Valentina");
+            
+        if (generator.nextBoolean() == false)
+            setSurname("Gagarin");
+        else
+            setSurname("Tereshkov");
+        
+        setAge(generator.nextInt(MAX_AGE_VALUE+1));
+        
+        setGender(generator.nextBoolean());
+        
+        if (isAGirl())
+            surname+="a";
+    }
+    
+    /**
+     * Constructor that allows you to introduce a default age
+     * 
+     * @param new default name
+     */
+    public Person(int age)
+    {
+        this();
+        setAge(age);
+    }
+    
+    /**
+     * Constructor that allows you to introduce a default name and surname
+     * 
+     * @param new defalt name and surname
+     */
+    public Person(String name, String surname)
+    {
+        this();
+        setName(name);
+        setSurname(surname);
+    }
+    
+    /**
+     * Constructor that allows you to introduce a default values for the person class
+     * 
+     * @param all the values of the person class
+     */
+    public Person(String name, String surname, int age, boolean gender)
+    {
+        this(name, surname);
+        setAge(age);
+        setGender(gender);
+    }
+    
+    
+    /**
+     * It changes the person name
+     * 
+     * @param The new value for the name field.
+     */
+    public void setName (String name)
+    {
+        this.name = name;
+    }
+    
+    /**
+     * It returns the person name
+     * 
+     * @return The value for the name field
+     */
+    public String getName ()
+    {
+        return name;
+    }
+    
+    /**
+     * It changes the person surname
+     * 
+     * @param The new value for te surname field
+     */
+    public void setSurname (String surname)
+    {
+        this.surname = surname;
+    }
+    
+    /**
+     * It returns the person surname
+     * 
+     * @return The value for he surname field
+     */
+    public String getSurname ()
+    {
+        return surname;
+    }
+    
+    /**
+     * It allows you to change the age value
+     * 
+     * @param The new value for the age field (it must be in the range [0, 118])
+     */
+    public void setAge (int age)
+    {
+        if (age >= 0 && age <= MAX_AGE_VALUE) // The value must be in the range [0, 118]
+            this.age = age;
+    }
+    
+    /**
+     * It returns the age value
+     * 
+     * @return The value for the age field
+     */
+    public int getAge ()
+    {
+        return age;
+    }
+    
+    /**
+     * It allows you to change the person gender
+     * 
+     * @param The new value for the gender field (true for women and false for men)
+     */
+    public void setGender (boolean gender)
+    {
+        this.gender = gender;
+    }
+    
+    /**
+     * It returns the gender value
+     * 
+     * @return The value of the gender field
+     */
+    public boolean getGender ()
+    {
+        return gender;
+    }
+    
+    /**
+     * It specifies if the gender is female or not
+     * 
+     * @return True if the person is a woman and false if the person is a man
+     */
+    public boolean isAGirl ()
+    {
+        if (gender == FEMALE_VALUE) //It's a girl
+            return true;
+        else //It's a man
+            return false;
+    }
+    
+    /**
+     * It displays the content of every field in this class in the computer's screen
+     */
+    public void print()
+    {
+        System.out.println ("Name: " + getName());
+        System.out.println ("Surname: " + getSurname());
+        System.out.println ("Age: " + getAge());
+        System.out.print ("Gender: ");
+        if (!isAGirl())
+            System.out.println (MALE_TEXT);
+        else
+            System.out.println (FEMALE_TEXT);
+    }
+    
+    /**
+     * It shows the values of every single field in the class as a String
+     * 
+     * @return String containing the values of all object's fields
+     */
+    public String toStringV1()
+    {
+       String aux = "[Name: " + getName() + " - Surname: " + getSurname() + " - Age: " + getAge() + " - Gender: ";
+       
+       if (isAGirl())
+            aux += FEMALE_TEXT;
+       else
+            aux += MALE_TEXT;
+       aux += "]";
+       
+       return aux;
+    }
+    
+    /**
+     * It returns the male or female text depending on the gender of the person
+     * 
+     * @return String containing the value of the gender
+     */
+    public String getGenderText()
+    {
+        if (isAGirl())
+            return FEMALE_TEXT;
+        else
+            return MALE_TEXT;
+    }
+    
+    public String toStringV2()
+    {
+       return "[Name: " + getName() + " - Surname: " + getSurname() + " - Age: " + getAge() + " - Gender: " + getGenderText() +"]";
+    }
+    
+    /**
+     * Creates an identifier for the object. It is a String value 
+     * obtained from the values of every single field in the class
+     * 
+     * @return String that represents a unique identifier (code) for the object
+     */
+    public String getHashCode()
+    {
+        return getName().substring(0,3).toUpperCase() + "-" + getSurname().substring(0,3).toUpperCase() + "-" + getAge() + "-" + getGender();
+    }
+    
+    /**
+     * It specifies the years remaining to adulthood or retirement, or years after that, depending on the age
+     * 
+     * 
+     * @return If the person age is less than adulthood age, the years remaining until adulthood
+     * If it's between adulthood and retirement age, the years until retirement
+     * If it's greater than retirement, the years after that
+     */
+    public int getCriticalAge()
+    {
+        if (age < ADULTHOOD_AGE)
+            return ADULTHOOD_AGE - getAge();
+        else if (age >= ADULTHOOD_AGE && age < RETIREMENT_AGE) 
+            return RETIREMENT_AGE - getAge();
+        else
+            return getAge() - RETIREMENT_AGE;
+    }
+    
+    /**
+     * It returns true if the age is the same as user's one
+     * 
+     * @param a new age for the comparison
+     * @return true if it's the same as the user's one, false otherwise
+     */
+    public boolean isYourAge(int age)
+    {
+        return getAge() == age;
+    }
+    
+    /**
+     * It returns true if the name is the same as user's one
+     * 
+     * @param a new name for the comparison
+     * @return true if it's the same as user's one, false otherwise
+     */
+    public boolean isYou(String name)
+    {
+        return name.equalsIgnoreCase(getName());
+    }
+    
+    /**
+     * It returns true if the fields provided are the same as the user's ones
+     * 
+     * @param all the values of the person class
+     * @return true if the values provided are the same as the user, false otherwise
+     */
+    
+    public boolean isYou(Person person)
+    {
+        return isYou(person.getName()) && 
+        getSurname().equalsIgnoreCase(person.getSurname());
+        
+    }
+    
+    /**
+     * It compares the age of two people and determines if it's higher, less or equal
+     * 
+     * @param A new person values
+     * @return 0 if the age is the same, 1 if it's higher or -1 if it's less     * 
+     */
+    
+    public int compareTo(Person person)
+    {
+        if (isYourAge(person.getAge()))
+            return 0;
+        else if (getAge() < person.getAge())
+            return -1;
+        else
+            return 1;
+    }
+    
+    
+}
