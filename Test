@@ -1,0 +1,162 @@
+/**
+ * Write a description of class Test here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Test
+{
+    
+
+    /**
+     * Constructor for objects of class Test
+     */
+    public Test()
+    {
+        
+    }
+    
+    /**
+     * Executes several test on the Gender related methods of the Person class.
+     * 
+     * The tested methods are:
+     * - setGender
+     * - getGender
+     * - isAGirl
+     * 
+     * @return True if all the tests passes. Otherwise it returns false.
+     */
+    
+    public static boolean testGender()
+    {
+       Person dummy = new Person(); 
+       
+       //T1
+       dummy.setGender(Person.FEMALE_VALUE);
+       if (dummy.getGender() != Person.FEMALE_VALUE) // <- Capture the bug
+       {
+           System.err.println ("ERROR T1 value true"); 
+           return false;
+        }
+          
+       //T2
+       dummy.setGender(Person.MALE_VALUE);
+       if (dummy.getGender() != Person.MALE_VALUE) // <- Capture the bug
+       {
+           System.err.println ("ERROR T2 value true"); 
+           return false;
+        }    
+       
+       //T3 isAGirl()
+       dummy.setGender(Person.FEMALE_VALUE);
+       if (!dummy.isAGirl()) // <- captures the bug
+       {
+           System.err.println ("ERROR T3 value is a girl (FEMALE)");
+           return false;
+        }
+       
+        //T4 isAGirl()
+       dummy.setGender(Person.MALE_VALUE);
+       if (dummy.isAGirl()) // <- captures the bug
+       {
+           System.err.println ("ERROR T4 value is a girl (MALE)");
+           return false;
+        } 
+       
+       return true; //All tests passed
+    }
+    
+    /**
+     * Returns true if the setAge() method in Person passes a series of positive and negative tests
+     * 
+     * @return True if setAge() passes the tests, false otherwise
+     */
+   
+    public static boolean testAge()
+    {
+        Person dummy = new Person();
+        
+        //T1
+        dummy.setAge(0);
+        if (dummy.getAge() != 0) //<- captures the bug
+        {
+            System.err.println ("ERROR T1 value 0");
+            return false;
+        }
+        
+        //T2
+        dummy.setAge(Person.MAX_AGE_VALUE);
+        if (dummy.getAge() != Person.MAX_AGE_VALUE) //<- captures the bug
+        {
+            System.err.println ("ERROR T2 value 118");
+            return false;
+        }
+        
+        //T3
+        int testValue = Person.MAX_AGE_VALUE/2;
+        dummy.setAge(testValue);
+        if (dummy.getAge() != testValue) //<- captures the bug
+        {
+            System.err.println ("ERROR T3 value 52");
+            return false;
+        }
+        
+        //T4
+        dummy.setAge(0);
+        dummy.setAge(-1);
+        if (dummy.getAge() != 0) //<- captures the bug
+        {
+            System.err.println ("ERROR T4 value -1");
+            return false;
+        }
+        
+        //T5
+        dummy.setAge(0);
+        dummy.setAge(-10);
+        if (dummy.getAge() != 0) //<- captures the bug
+        {
+            System.err.println ("ERROR T5 value -10");
+            return false;
+        }
+        
+        //T6
+        dummy.setAge(0);
+        dummy.setAge(Person.MAX_AGE_VALUE + 1);
+        if (dummy.getAge() != 0) //<- captures the bug
+        {
+            System.err.println ("ERROR T6 value Person.MAX_AGE_VALUE + 1");
+            return false;
+        }
+        
+        //T7
+        dummy.setAge(0);
+        dummy.setAge(Person.MAX_AGE_VALUE * 2);
+        if (dummy.getAge() != 0) //<- captures the bug
+        {
+            System.err.println ("ERROR T7 value Person.MAX_AGE_VALUE * 2");
+            return false;
+        }
+        
+        return true; //All tests passes
+    }
+    
+    /**
+     * Returns true if ALL the testing methods return true. False if at leats one method returns false. 
+     *
+     * @return True if all testing method return true. False otherwise.
+     */
+    
+    public static boolean test()
+    {
+        return testGender() && testAge();
+        /*
+       
+         if (testGender() && testAge())
+        
+            return true;
+        else
+            return false;
+        
+        */
+    }
+}
