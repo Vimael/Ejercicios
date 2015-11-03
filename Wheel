@@ -1,0 +1,109 @@
+
+/**
+ * Write a description of class Wheel here.
+ * 
+ * @author (Víctor Manuel Núñez González) 
+ * @version (28102015)
+ */
+public class Wheel
+{
+    public double size; //represents the max size of the wheel measured in bars
+    public double pressure; //represents the pressure of the air in the wheel
+    
+    public final static double SAFETY_THRESHOLD = 0.8;
+    
+    /**
+     * Constructor for the size of the wheel
+     * 
+     * @param the initial size value
+     * @param the initial pressure value
+     */
+    public Wheel(double size, double pressure) throws Exception
+    {
+        if(size>=0)
+            this.size = size;
+        else
+            throw new Exception ("Wrong value, it has to be equal or greater zero");        
+        
+        setPressure(pressure);
+    }
+    
+    
+    
+    /**
+     * It returns the size of the wheel
+     * 
+     * @return the current size of the wheel
+     */
+    public double getSize()
+    {
+        return size;
+    }
+    
+    /**
+     * It changes the pressure value
+     * 
+     * @param new value for the pressure field
+     */
+    public void setPressure(double pressure) throws Exception
+    {
+        if (pressure >=0 && pressure <= getSize())
+            this.pressure = pressure;
+        else
+            throw new Exception ("Wrong value, it can't be negative and it has to be less or equal to the size of the wheel");
+    }
+    
+    /**
+     * It returns the pressure of the wheel
+     * 
+     * @return the pressure of the wheel
+     */
+    public double getPressure()
+    {
+        return pressure;
+    }
+    
+    /**
+     * It returns if the pressure is OK
+     * 
+     * @return true if the inflation is OK, false otherwise
+     */
+    public boolean isOperational()
+    {
+        if(pressure <= getSize()+(getSize()*SAFETY_THRESHOLD) 
+        && pressure >= getSize()-(getSize()*SAFETY_THRESHOLD))
+            return true;
+        else
+            return false;       
+        
+    }
+    
+    /**
+     * It returns the ratio of pressure/size
+     * 
+     * @return the ratio of pressure/size
+     */
+    private double getRatio()
+    {
+        return getPressure()/getSize();
+    }
+    
+    /**
+     * It returns the status of the wheel
+     * 
+     * @return a string containing the status of the wheel
+     */
+    public String toString()
+    {
+        return "Size: " + String.format("%.2f", getSize()) + " bars - Pressure: " + String.format("%.2f", getPressure()) + 
+        " bars - Ratio: " + String.format("%.2f", getRatio()) + " - Op: " + isOperational();
+    }
+    
+    /**
+     * It returns the status of the wheel
+     */
+    public void print()
+    {
+        System.out.println (toString());
+    }
+}
