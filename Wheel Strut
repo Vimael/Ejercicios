@@ -1,0 +1,48 @@
+
+/**
+ * Write a description of class WheelStrut here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class WheelStrut
+{
+    public Wheel left;
+    public Wheel right;
+    public char ID;
+    
+    /** 
+     * Constructor for the WheelStrut class
+     * 
+     * @param The default ID value
+     * @param The default wheelSize
+     */    
+    public WheelStrut(char ID, double wheelSize) throws Exception
+    {
+        //it creates two wheels with a size and max pressure
+        left = new Wheel(wheelSize, wheelSize);
+        right = new Wheel(wheelSize, wheelSize);
+        
+        setID(ID);
+    }
+    
+    /**
+     * It allows you to change the ID field
+     * 
+     * @param the new ID value
+     */
+    public void setID(char ID)
+    {
+        this.ID = ID;
+    }
+    
+    /**
+     * It returns the current ID of the wheelStrut
+     * 
+     * @return the ID of the wheelStrut
+     */    
+    public char getID()
+    {
+        return ID;
+    }
+}
