@@ -1,0 +1,262 @@
+import java.util.*;
+/**
+ * Write a description of class Airplane here.
+ * 
+ * @author (Víctor Manuel Núñez González) 
+ * @version (21102015)
+ */
+public class Airplane
+{
+    public final static int MAX_X = 10;
+    public final static int MAX_Y = 10;
+    
+    public final static int MAX_X_SPEED = 1;
+    public final static int MIN_X_SPEED = -1;
+    public final static int MAX_Y_SPEED = 1;
+    public final static int MIN_Y_SPEED = -1;
+    
+    private char ID; //it's an identificator for the airplane
+    private double fuel; //current amount of fuel in tons
+    private double altitude; //current altitude in Km.
+    private int xPos; //x-coortdinate for the plane or abscissa ([0, MAX_X])
+    private int yPos; //y-coortdinate for the plane or abscissa ([0, MAX_Y])
+    private int xSpeed; //x-speed for the plane or abscissa ([MIN_X_SPEED, 0, MAX_X_SPEED])
+    private int ySpeed; //y-speed for the plane or abscissa ([MIN_Y_SPEED, 0, MAX_Y_SPEED])
+    private Person commander; //the commander of the airplane from the person class
+    private Person FO; //the first officer of the airplane from the person class
+    
+    
+    
+    //-----------------------------------------CONSTRUCTORS---------------------------------------------
+    
+    /**
+     * Constructor for objects of class Airplane
+     * It generates a commander and a first officer from the Person class
+     */
+    public Airplane()
+    {
+        Random generator = new Random();
+        commander = new Person(); 
+        FO = new Person();
+        setFuel(generator.nextDouble());
+        setAltitude(generator.nextDouble());
+        setXPos(generator.nextInt(MAX_X+1));
+        setYPos(generator.nextInt(MAX_Y+1)); 
+        setXSpeed(generator.nextInt(MAX_X_SPEED+2)-1); 
+        setYSpeed(generator.nextInt(MAX_Y_SPEED+2)-1); 
+        setID('X');
+
+    }
+    
+    /**
+     * Constructor for giving a default ID for the airplane
+     * 
+     * @param new ID value
+     */
+    public Airplane(char ID)
+    {
+        setID(ID);
+    }
+    
+    /**
+     * It sets the default values for the Ariplane class
+     * 
+     * @param new ID value
+	 * @param new fuel value
+     * @param new altitude value
+     * @param new xPos value
+     * @param new yPos value
+     * @param new xSpeed value
+     * @param new ySpeed value
+     */
+
+    public Airplane(char ID, double fuel, double altitude, int xPos, int yPos, int xSpeed, int ySpeed)
+    {
+        this(ID);
+        setFuel(fuel);
+        setAltitude(altitude);
+        setXPos(xPos);
+        setYPos(yPos);
+        setXSpeed(xSpeed);
+        setYSpeed(ySpeed); 
+        
+
+
+    }
+    
+    
+    
+    //--------------------------------------SETTERS AND GETTERS------------------------------------------
+    
+    /**
+     * It changes the airplane ID
+     * 
+     * @param The new value for the ID field.
+     */
+    public void setID (char ID)
+    {
+        this.ID = ID;
+    }
+    
+    /**
+     * It returns the airplane ID
+     * 
+     * @return The value for the ID field
+     */
+    public char getID ()
+    {
+        return ID;
+    }
+    
+    /**
+     * It changes the airplane fuel
+     * 
+     * @param The new value for the fuel field.
+     */
+    public void setFuel (double fuel)
+    {
+        if(fuel>=0)
+			this.fuel = fuel;
+    }
+    
+    /**
+     * It returns the airplane fuel
+     * 
+     * @return The value for the fuel field
+     */
+    public double getFuel ()
+    {
+        return fuel;
+    }
+    
+    /**
+     * It changes the airplane altitude
+     * 
+     * @param The new value for the altitude field.
+     */
+    public void setAltitude (double altitude)
+    {
+        if (altitude >= 0)
+			this.altitude = altitude;
+    }
+    
+    /**
+     * It returns the airplane altitude
+     * 
+     * @return The value for the altitude field
+     */
+    public double getAltitude ()
+    {
+        return altitude;
+    }
+    
+    /**
+     * It changes the airplane xPos
+     * 
+     * @param The new value for the xPos field
+     */
+    public void setXPos (int xPos)
+    {
+        if (xPos >=0 && xPos <=MAX_X)
+            this.xPos = xPos;
+    }
+    
+    /**
+     * It returns the airplane xPos
+     * 
+     * @return The value for the xPos field
+     */
+    public int getXPos ()
+    {
+        return xPos;
+    }
+    
+    /**
+     * It changes the airplane yPos
+     * 
+     * @param The new value for the yPos field
+     */
+    public void setYPos (int yPos)
+    {
+        if (yPos >=0 && yPos <=MAX_Y)
+            this.yPos = yPos;
+    }
+    
+    /**
+     * It returns the airplane yPos
+     * 
+     * @return The value for the yPos field
+     */
+    public int getYPos ()
+    {
+        return yPos;
+    }
+    
+    /**
+     * It changes the airplane xSpeed
+     * 
+     * @param The new value for the xSpeed field
+     */
+    public void setXSpeed (int xSpeed)
+    {
+        if (xSpeed >=MIN_X_SPEED && xSpeed <=MAX_X_SPEED)
+            this.xSpeed = xSpeed;
+    }
+    
+    /**
+     * It returns the airplane xSpeed
+     * 
+     * @return The value for the xSpeed field
+     */
+    public int getXSpeed ()
+    {
+        return xSpeed;
+    }
+    
+    /**
+     * It changes the airplane ySpeed
+     * 
+     * @param The new value for the ySpeed field
+     */
+    public void setYSpeed (int ySpeed)
+    {
+        if (ySpeed >=MIN_Y_SPEED && ySpeed <=MAX_Y_SPEED)
+            this.ySpeed = ySpeed;
+    }
+    
+    /**
+     * It returns the airplane ySpeed
+     * 
+     * @return The value for the ySpeed field
+     */
+    public int getYSpeed ()
+    {
+        return ySpeed;
+    }
+    
+    
+    
+    //-----------------------------------METHODS-----------------------------------------
+    
+    /**
+     * It displays the content of every field in this class in the computer's screen
+     * 
+     * @return all the fields of the Airplane calss
+     */
+    public String toString()
+    {
+       return "ID: " + getID() + 
+        " - Fuel: " + getFuel() + 
+        " - Altitude: " + getAltitude()+ 
+        " - Pos[" + getXPos() + "," + getYPos() + 
+        "] - Speed[" + getXSpeed() + "," + getYSpeed() + "]";
+    }
+    
+    /**
+     * It displays the content of every field in this class in the computer's screen
+     */
+    public void print()
+    {
+        System.out.println (toString());
+    }
+}
