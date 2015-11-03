@@ -1,0 +1,180 @@
+
+
+import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * The test class AirplaneTest.
+ *
+ * @author  (your name)
+ * @version (a version number or a date)
+ */
+public class AirplaneTest
+{
+    /**
+     * Default constructor for test class AirplaneTest
+     */
+    public AirplaneTest()
+    {
+    }
+
+    /**
+     * Sets up the test fixture.
+     *
+     * Called before every test case method.
+     */
+    @Before
+    public void setUp()
+    {
+    }
+
+    /**
+     * Tears down the test fixture.
+     *
+     * Called after every test case method.
+     */
+    @After
+    public void tearDown()
+    {
+    }
+
+    @Test
+    public void testID()
+    {
+        Airplane airplane1 = new Airplane();
+        airplane1.setID('a');
+        assertEquals('a', airplane1.getID());
+        airplane1.setID('b');
+        assertEquals('b', airplane1.getID());
+    }
+
+    @Test
+    public void testFuel()
+    {
+        Airplane airplane1 = new Airplane();
+        //Positive testing
+        airplane1.setFuel(32.45);
+        assertEquals(32.45, airplane1.getFuel(), 0.1);
+        airplane1.setFuel(0);
+        assertEquals(0, airplane1.getFuel(), 0.1);
+        //Negative testing
+        airplane1.setFuel(-1);
+        assertEquals(0, airplane1.getFuel(), 0.1);
+        
+    }
+
+    @Test
+    public void testAltitude()
+    {
+        Airplane airplane1 = new Airplane();
+        //Postive testing
+        airplane1.setAltitude(234.43);
+        assertEquals(234.43, airplane1.getAltitude(), 0.1);
+        airplane1.setAltitude(0);
+        assertEquals(0, airplane1.getAltitude(), 0.1);
+        //Negative testing
+        airplane1.setAltitude(-1);
+        assertEquals(0, airplane1.getAltitude(), 0.1);
+    }
+    
+    @Test
+    public void testSpeed()
+    {
+        Airplane airplane1 = new Airplane();
+        
+        
+        //POSSITIVE TESTING
+        
+        //xSpeed
+        airplane1.setXSpeed(Airplane.MIN_X_SPEED);
+        assertEquals(-1, airplane1.getXSpeed());
+        airplane1.setXSpeed(0);
+        assertEquals(0, airplane1.getXSpeed());
+        airplane1.setXSpeed(Airplane.MAX_X_SPEED);
+        assertEquals(Airplane.MAX_X_SPEED, airplane1.getXSpeed());
+        
+        //ySpeed
+        airplane1.setXSpeed(Airplane.MIN_Y_SPEED);
+        assertEquals(Airplane.MIN_Y_SPEED, airplane1.getXSpeed());
+        airplane1.setXSpeed(0);
+        assertEquals(0, airplane1.getXSpeed());
+        airplane1.setXSpeed(Airplane.MAX_Y_SPEED);
+        assertEquals(Airplane.MAX_Y_SPEED, airplane1.getXSpeed());
+        
+        
+        //NEGATIVE TESTING
+        
+        //xSpeed
+        airplane1.setXSpeed(Airplane.MIN_X_SPEED);
+        airplane1.setXSpeed(Airplane.MIN_X_SPEED -10);
+        assertEquals(Airplane.MIN_X_SPEED, airplane1.getXSpeed());
+        airplane1.setXSpeed(Airplane.MAX_X_SPEED + 10);
+        assertEquals(Airplane.MIN_X_SPEED, airplane1.getXSpeed());
+        
+        //ySpeed
+        airplane1.setYSpeed(Airplane.MIN_Y_SPEED);
+        airplane1.setYSpeed(Airplane.MIN_Y_SPEED-10);
+        assertEquals(Airplane.MIN_Y_SPEED, airplane1.getYSpeed());
+        airplane1.setYSpeed(Airplane.MAX_Y_SPEED+10);
+        assertEquals(Airplane.MIN_X_SPEED, airplane1.getYSpeed());
+        
+        
+    }
+    
+    @Test
+    
+    public void testPos()
+    {
+        Airplane airplane1 = new Airplane();
+        
+        
+        //POSSITIVE TESTING
+        
+        //xPos             
+        airplane1.setXPos(0);
+        assertEquals(0, airplane1.getXPos());
+        airplane1.setXPos(Airplane.MAX_X);
+        assertEquals(Airplane.MAX_X, airplane1.getXPos());
+        airplane1.setXPos(Airplane.MAX_X/2);
+        assertEquals(Airplane.MAX_X/2, airplane1.getXPos());
+        
+        //yPos
+        airplane1.setYPos(0);
+        assertEquals(0, airplane1.getYPos());
+        airplane1.setYPos(Airplane.MAX_Y);
+        assertEquals(Airplane.MAX_Y, airplane1.getYPos());
+        airplane1.setYPos(Airplane.MAX_Y/2);
+        assertEquals(Airplane.MAX_Y/2, airplane1.getYPos());
+        
+        
+        //NEGATIVE TESTING
+        
+        //xPos
+        airplane1.setXPos(0);
+        airplane1.setXPos(Airplane.MAX_X+1);
+        assertEquals(0, airplane1.getXPos());
+        airplane1.setXPos(Airplane.MAX_X+10);
+        assertEquals(0, airplane1.getXPos());
+        airplane1.setXPos(-1);
+        assertEquals(0, airplane1.getXPos());
+        airplane1.setXPos(-10);
+        assertEquals(0, airplane1.getXPos());
+        
+        //yPos
+        airplane1.setYPos(0);
+        airplane1.setYPos(Airplane.MAX_Y+1);
+        assertEquals(0, airplane1.getYPos());
+        airplane1.setYPos(Airplane.MAX_Y+10);
+        assertEquals(0, airplane1.getYPos());
+        airplane1.setYPos(-1);
+        assertEquals(0, airplane1.getYPos());
+        airplane1.setYPos(-10);
+        assertEquals(0, airplane1.getYPos());
+    }
+    
+ }
+
+
+
