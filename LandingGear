@@ -1,0 +1,120 @@
+
+/**
+ * Write a description of class LandingGear here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class LandingGear
+{
+    WheelStrut nose;
+    WheelStrut left;
+    WheelStrut right;
+    boolean lever;
+    private final static boolean LEVER_UP = false;
+    private final static boolean LEVER_DOWN = true;
+
+    /**
+     * Constructor for objects of class LandingGear
+     */
+    public LandingGear() throws Exception
+    {
+       nose = new WheelStrut('N', 100);
+       left = new WheelStrut('L', 100);
+       right = new WheelStrut('R', 100);
+       setLeverDown();
+    }
+    
+    /**
+     * It changes the value of the lever field to LEVER_UP 
+     */
+    public void setLeverUp()
+    {
+        this.lever = LEVER_UP;
+        nose.setDeployed(false);
+        left.setDeployed(false);
+        right.setDeployed(false);
+    }
+    
+    /**
+     * It changes the value of the lever field to LEVER_DOWN
+     */
+    public void setLeverDown()
+    {
+        this.lever = LEVER_DOWN;
+        nose.setDeployed(true);
+        left.setDeployed(true);
+        right.setDeployed(true);
+    }
+    
+    /**
+     * It returns if the lever is up or down
+     * 
+     * @return true if the lever is up, false othewise
+     */
+    public boolean getLever()
+    {
+        if(lever == true)
+            return true;
+        else
+            return false;
+    }
+    
+    //IMPLEMENT isOpertional()
+    
+    /**
+     * It returns a control panel with the values of wheelStrut and landingGear
+     * 
+     * @return a string containing values of the wheelstrut and landingGear
+     */
+    public String toString()
+    {
+        String aux = "Lever: " ;  
+        //It adds to the full string if the lever is up or down
+        if(getLever() == LEVER_UP)
+            aux+="UP ";
+        else
+            aux+="DOWN ";        
+        
+        /*
+         * It adds to the full string if all the wheelstruts are operational 
+         * and they has the same value as the lever
+         */
+        aux+="Status: ";
+        if(nose.isOperational() && left.isOperational() && right.isOperational() &&
+        nose.isDeployed() == getLever() && left.isDeployed() == getLever() && right.isDeployed() == getLever())
+            aux+="ON ";
+        else
+            aux+="OFF ";
+            
+        //It checks the nose wheelstrut
+        aux+="Nose: ";
+        if(nose.isOperational() == false)
+            aux+="PRESS ";
+        else if (nose.isDeployed())
+            aux+="ON ";
+        else
+            aux+="OFF ";
+            
+        //It checks the left wheelstrut
+        aux+="Left: ";
+        if(left.isOperational() == false)
+            aux+="PRESS ";
+        else if (left.isDeployed())
+            aux+="ON ";
+        else
+            aux+="OFF ";
+            
+        //It checks the right wheelstrut
+        aux+="Right: ";
+        if(right.isOperational() == false)
+            aux+="PRESS ";
+        else if (right.isDeployed())
+            aux+="ON";
+        else
+            aux+="OFF";
+            
+        return aux;
+    }
+    
+}
