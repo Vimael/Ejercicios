@@ -11,8 +11,8 @@ public class LandingGear
     WheelStrut left;
     WheelStrut right;
     boolean lever;
-    private final static boolean LEVER_UP = false;
-    private final static boolean LEVER_DOWN = true;
+    final static boolean LEVER_UP = false;
+    final static boolean LEVER_DOWN = true;
 
     /**
      * Constructor for objects of class LandingGear
@@ -22,30 +22,31 @@ public class LandingGear
        nose = new WheelStrut('N', 100);
        left = new WheelStrut('L', 100);
        right = new WheelStrut('R', 100);
-       setLeverDown();
+       setLever(LEVER_DOWN);
+    }
+
+    /**
+     * It changes the position of the lever
+     * 
+     * @param the new value for the lever field
+     */
+    public void setLever(boolean lever)
+    {
+        this.lever = lever;
+        if (lever == LEVER_UP)
+        {
+            nose.setDeployed(false);
+            left.setDeployed(false);
+            right.setDeployed(false);
+        }
+        else
+        {
+            nose.setDeployed(true);
+            left.setDeployed(true);
+            right.setDeployed(true);
+        }
     }
     
-    /**
-     * It changes the value of the lever field to LEVER_UP 
-     */
-    public void setLeverUp()
-    {
-        this.lever = LEVER_UP;
-        nose.setDeployed(false);
-        left.setDeployed(false);
-        right.setDeployed(false);
-    }
-    
-    /**
-     * It changes the value of the lever field to LEVER_DOWN
-     */
-    public void setLeverDown()
-    {
-        this.lever = LEVER_DOWN;
-        nose.setDeployed(true);
-        left.setDeployed(true);
-        right.setDeployed(true);
-    }
     
     /**
      * It returns if the lever is up or down
@@ -54,13 +55,25 @@ public class LandingGear
      */
     public boolean getLever()
     {
-        if(lever == true)
+        return lever;
+    }
+
+    
+    public boolean isOperational()
+    {
+        if(nose.isOperational() && left.isOperational() && right.isOperational())
             return true;
         else
             return false;
     }
     
-    //IMPLEMENT isOpertional()
+    public boolean isDeployed()
+    {
+        if(nose.isDeployed() == getLever() && left.isDeployed() == getLever() && right.isDeployed() == getLever())
+            return true;
+        else
+            return false;
+    }
     
     /**
      * It returns a control panel with the values of wheelStrut and landingGear
@@ -81,11 +94,10 @@ public class LandingGear
          * and they has the same value as the lever
          */
         aux+="Status: ";
-        if(nose.isOperational() && left.isOperational() && right.isOperational() &&
-        nose.isDeployed() == getLever() && left.isDeployed() == getLever() && right.isDeployed() == getLever())
+        if(isOperational() && isDeployed())
             aux+="ON ";
         else
-            aux+="OFF ";
+            aux+="FAILURE ";
             
         //It checks the nose wheelstrut
         aux+="Nose: ";
@@ -108,7 +120,7 @@ public class LandingGear
         //It checks the right wheelstrut
         aux+="Right: ";
         if(right.isOperational() == false)
-            aux+="PRESS ";
+            aux+="PRESS";
         else if (right.isDeployed())
             aux+="ON";
         else
