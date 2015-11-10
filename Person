@@ -31,11 +31,6 @@ public class Person
     public Person()
     {
         Random generator = new Random();
-
-        if (generator.nextBoolean() == false)
-            setName("Yuri");
-        else
-            setName("Valentina");
             
         if (generator.nextBoolean() == false)
             setSurname("Gagarin");
@@ -46,8 +41,13 @@ public class Person
         
         setGender(generator.nextBoolean());
         
-        if (isAGirl())
-            surname+="a";
+        if (!isAGirl())
+            setName("Yuri");
+        else
+        {
+            setName("Valentina");
+            setSurname(surname+="a");
+        }
     }
     
     /**
