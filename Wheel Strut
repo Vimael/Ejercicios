@@ -9,7 +9,7 @@ public class WheelStrut
     Wheel left;
     Wheel right;
     private boolean deployed;
-    public char ID;
+    private char ID;
     
     /** 
      * Constructor for the WheelStrut class
