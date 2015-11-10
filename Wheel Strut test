@@ -48,4 +48,39 @@ public class WheelStrutTest
         wheelStr1.setID('v');
         assertEquals('v', wheelStr1.getID());
     }
+    
+    @Test
+    public void TestIsOperational() throws Exception
+    {
+        WheelStrut  wstr1 = new WheelStrut('v', 50);
+        assertEquals(true, wstr1.isOperational());
+        
+        //Changing left wheel pressure
+        wstr1.left.setPressure(2);
+        assertEquals(false, wstr1.isOperational());
+        
+        //Changing right wheel pressure
+        wstr1.left.setPressure(50);
+        wstr1.left.setPressure(2);
+        assertEquals(false, wstr1.isOperational());
+    }
+    
+    @Test
+    public void testToString() throws Exception
+    {
+        WheelStrut  wstr1 = new WheelStrut('v', 50);
+        wstr1.setDeployed(true);
+        //positive testing
+        assertEquals("ID: v - Deployed: true - Op: true [L: true][R: true]", wstr1.toString());
+        
+        //making left wheel fail
+        wstr1.left.setPressure(2);
+        wstr1.setDeployed(false);
+        assertEquals("ID: v - Deployed: false - Op: false [L: false][R: true]", wstr1.toString());
+        
+        //making left wheel fail
+        wstr1.right.setPressure(2);
+        assertEquals("ID: v - Deployed: false - Op: false [L: false][R: false]", wstr1.toString());
+    }
 }
+
