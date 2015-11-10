@@ -1,0 +1,91 @@
+
+
+import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * The test class LandingGearTest.
+ *
+ * @author  (your name)
+ * @version (a version number or a date)
+ */
+public class LandingGearTest
+{
+    /**
+     * Default constructor for test class LandingGearTest
+     */
+    public LandingGearTest()
+    {
+    }
+
+    /**
+     * Sets up the test fixture.
+     *
+     * Called before every test case method.
+     */
+    @Before
+    public void setUp()
+    {
+    }
+
+    /**
+     * Tears down the test fixture.
+     *
+     * Called after every test case method.
+     */
+    @After
+    public void tearDown()
+    {
+    }
+    
+    @Test
+    public void testLandingGear() throws Exception
+    {
+        LandingGear lg = new LandingGear();
+        
+        //Checking levers:
+        
+        //---------LEVER UP-----------------
+        lg.setLever(LandingGear.LEVER_UP);
+        assertEquals("Lever: UP Status: ON Nose: OFF Left: OFF Right: OFF", lg.toString());
+        assertEquals(LandingGear.LEVER_UP, lg.getLever());
+        
+        //---------LEVER DOWN---------------
+        lg.setLever(LandingGear.LEVER_DOWN);
+        assertEquals("Lever: DOWN Status: ON Nose: ON Left: ON Right: ON", lg.toString());
+        assertEquals(LandingGear.LEVER_DOWN, lg.getLever());
+        
+        
+        //Hacking wheelstruts:
+        
+        //----------NOSE WHEELSTRUT-------------
+        lg.nose.setDeployed(false);
+        assertEquals("Lever: DOWN Status: FAILURE Nose: OFF Left: ON Right: ON", lg.toString());
+        
+        //----------LEFT WHEELSTRUT-------------
+        lg.left.setDeployed(false);
+        assertEquals("Lever: DOWN Status: FAILURE Nose: OFF Left: OFF Right: ON", lg.toString());
+        
+        //----------RIGHT WHEELSTRUT------------
+        lg.right.setDeployed(false);
+        assertEquals("Lever: DOWN Status: FAILURE Nose: OFF Left: OFF Right: OFF", lg.toString());
+        
+        //Damaging wheels:
+        
+        //--------LEFT WHEEL------------
+        lg.setLever(LandingGear.LEVER_UP);//Restarting default values
+        
+        lg.nose.left.setPressure(0);//Exploding left nose wheel
+        assertEquals("Lever: UP Status: FAILURE Nose: PRESS Left: OFF Right: OFF", lg.toString());
+        
+        
+        //--------RIGHT WHEEL-----------
+        lg.left.right.setPressure(0);//Exploding right left wheel
+        assertEquals("Lever: UP Status: FAILURE Nose: PRESS Left: PRESS Right: OFF", lg.toString());
+        
+        lg.right.right.setPressure(0);//Exploding right right wheel
+        assertEquals("Lever: UP Status: FAILURE Nose: PRESS Left: PRESS Right: PRESS", lg.toString());
+    }
+}
