@@ -7,7 +7,7 @@
  */
 public class LandingGear
 {
-    WheelStrut nose;
+    WheelStrut nose; 
     WheelStrut left;
     WheelStrut right;
     boolean lever;
@@ -58,7 +58,11 @@ public class LandingGear
         return lever;
     }
 
-    
+    /**
+     * It checks if all the wheel struts are operational
+     * 
+     * @return true if they are all operational, false otherwise
+     */
     public boolean isOperational()
     {
         if(nose.isOperational() && left.isOperational() && right.isOperational())
@@ -67,6 +71,11 @@ public class LandingGear
             return false;
     }
     
+    /**
+     * It checks if all the wheel struts are deployed
+     * 
+     * @return true if they are all deployed, false otherwise
+     */
     public boolean isDeployed()
     {
         if(nose.isDeployed() == getLever() && left.isDeployed() == getLever() && right.isDeployed() == getLever())
@@ -129,4 +138,11 @@ public class LandingGear
         return aux;
     }
     
+    /**
+     * It prints the control panel of the landing gear class using the toString method
+     */
+    public void print()
+    {
+        System.out.print(toString());
+    }    
 }
