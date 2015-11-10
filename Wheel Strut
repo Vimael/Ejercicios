@@ -53,10 +53,7 @@ public class WheelStrut
      */
     public boolean isOperational()
     {
-        if(left.isOperational() && right.isOperational())
-            return true;
-        else
-            return false;
+        return left.isOperational() && right.isOperational();
     }
     
     /**
