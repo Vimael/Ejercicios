@@ -65,10 +65,7 @@ public class LandingGear
      */
     public boolean isOperational()
     {
-        if(nose.isOperational() && left.isOperational() && right.isOperational())
-            return true;
-        else
-            return false;
+        return nose.isOperational() && left.isOperational() && right.isOperational();
     }
     
     /**
@@ -78,10 +75,7 @@ public class LandingGear
      */
     public boolean isDeployed()
     {
-        if(nose.isDeployed() == getLever() && left.isDeployed() == getLever() && right.isDeployed() == getLever())
-            return true;
-        else
-            return false;
+        return nose.isDeployed() == getLever() && left.isDeployed() == getLever() && right.isDeployed() == getLever();
     }
     
     /**
