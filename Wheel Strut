@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class WheelStrut here.
  * 
@@ -7,8 +6,9 @@
  */
 public class WheelStrut
 {
-    public Wheel left;
-    public Wheel right;
+    Wheel left;
+    Wheel right;
+    private boolean deployed;
     public char ID;
     
     /** 
@@ -44,5 +44,61 @@ public class WheelStrut
     public char getID()
     {
         return ID;
+    }
+    
+    /**
+     * It returns if the wheel strut works correctly
+     * 
+     * @return true if it's ok, false otherwise
+     */
+    public boolean isOperational()
+    {
+        if(left.isOperational() && right.isOperational())
+            return true;
+        else
+            return false;
+    }
+    
+    /**
+     * It makes the wheelstrut being deployed or not
+     * 
+     * @param the new value for the deployed field
+     */
+    public void setDeployed(boolean deployed)
+    {
+        this.deployed = deployed;        
+    }
+    
+    /**
+     * It checks if the wheelstrut is deployed or not
+     * 
+     * @return true if it's deployed, false otherwise
+     */
+    public boolean isDeployed()
+    {
+        return deployed;           
+    }
+    
+    /**
+     * It returns the condition of the wheelstrut as a string
+     * 
+     * @return a string containing the values of the wheelstrut class
+     */
+    public String toString()
+    {
+        return "ID: " + getID() + " - Deployed: " 
+        + isDeployed() + " - Op: " + isOperational() +
+        " [L: " + left.isOperational() + "][R: " 
+        + right.isOperational() + "]";
+    }
+    
+    /**
+     * It prints the details of the wheel and the wheelstrut
+     */
+    public void print()
+    {
+        System.out.println (toString());
+        System.out.println ("L: " + left.toString());
+        System.out.println ("R: " + right.toString());
     }
 }
