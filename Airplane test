@@ -41,7 +41,7 @@ public class AirplaneTest
     }
 
     @Test
-    public void testID()
+    public void testID() throws Exception
     {
         Airplane airplane1 = new Airplane();
         airplane1.setID('a');
@@ -51,7 +51,7 @@ public class AirplaneTest
     }
 
     @Test
-    public void testFuel()
+    public void testFuel() throws Exception
     {
         Airplane airplane1 = new Airplane();
         //Positive testing
@@ -66,7 +66,7 @@ public class AirplaneTest
     }
 
     @Test
-    public void testAltitude()
+    public void testAltitude() throws Exception
     {
         Airplane airplane1 = new Airplane();
         //Postive testing
@@ -80,7 +80,7 @@ public class AirplaneTest
     }
     
     @Test
-    public void testSpeed()
+    public void testSpeed() throws Exception
     {
         Airplane airplane1 = new Airplane();
         
@@ -125,7 +125,7 @@ public class AirplaneTest
     
     @Test
     
-    public void testPos()
+    public void testPos() throws Exception
     {
         Airplane airplane1 = new Airplane();
         
