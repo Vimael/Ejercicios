@@ -24,7 +24,7 @@ public class Airplane
     private int ySpeed; //y-speed for the plane or abscissa ([MIN_Y_SPEED, 0, MAX_Y_SPEED])
     private Person commander; //the commander of the airplane from the person class
     private Person FO; //the first officer of the airplane from the person class
-    
+    private LandingGear lg;
     
     
     //-----------------------------------------CONSTRUCTORS---------------------------------------------
@@ -32,12 +32,14 @@ public class Airplane
     /**
      * Constructor for objects of class Airplane
      * It generates a commander and a first officer from the Person class
+     * It creates too a new Landing Gear
      */
-    public Airplane()
+    public Airplane() throws Exception
     {
         Random generator = new Random();
         commander = new Person(); 
         FO = new Person();
+        lg = new LandingGear();
         setFuel(generator.nextDouble());
         setAltitude(generator.nextDouble());
         setXPos(generator.nextInt(MAX_X+1));
@@ -45,6 +47,7 @@ public class Airplane
         setXSpeed(generator.nextInt(MAX_X_SPEED+2)-1); 
         setYSpeed(generator.nextInt(MAX_Y_SPEED+2)-1); 
         setID('X');
+
 
     }
     
